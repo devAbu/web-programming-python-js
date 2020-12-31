@@ -1,102 +1,55 @@
-h1 {
-  color: blue;
-  text-align: center;
-}
-
-/* TABLE */
-table {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-/* td {
-  border: 1px solid black;
-  padding: 2px;
-}
-
-th {
-  border: 1px solid black;
-  padding: 2px;
-} 
-- Don't repeat yourself
-*/
-/* multiple selectors */
-td,
-th {
-  border: 1px solid black;
-  padding: 2px;
-}
-
-/* Descendant Selector */
-ul li {
-  color: blue;
-}
-/* Attributes as Selectors - Style <a> elements with a href="https://www.amazon.com/"*/
-a[href="https://www.amazon.com/"]
-{
+ul {
+  font-size: 14px;
   color: red;
 }
-/* Pseudo-classes */
-button {
-  background-color: red;
-  width: 200px;
-  height: 50px;
-  font-size: 24px;
-}
-/* ON HOVER */
-button:hover {
-  background-color: green;
+
+ol {
+  font-size: 18px;
+  color: red;
 }
 
-/* child selector - Select and style every <p> element where the parent is a <div> element:*/
-div > p {
-  background-color: yellow;
+div {
+  font-size: 18px;
 }
 
-/* adjacent sibling selector - Select and style the first <p> element that are placed immediately after <div> elements:*/
-div + p {
-  background-color: yellow;
+div p {
+  color: blue;
 }
 
-/* MEDIA QUERIES */
-@media (min-width: 600px) {
-  body {
-    background-color: red;
-  }
+div ul {
+  color: green;
 }
 
-@media (max-width: 599px) {
-  body {
-    background-color: blue;
-  }
+/* COMPILED */
+/* div {
+    font-size: 18px;
 }
 
-/* FLEXBOX */
-#container {
-  display: flex;
-  flex-wrap: wrap;
+div p {
+    color: blue;
 }
 
-#container > div {
-  background-color: green;
-  font-size: 20px;
+div ul {
+    color: green;
+} */
+.success, .warning, .error {
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 20px;
   margin: 20px;
-  padding: 20px;
-  width: 200px;
 }
 
-.grid {
+.success {
   background-color: green;
-  display: grid;
-  padding: 20px;
-  grid-column-gap: 20px;
-  grid-row-gap: 10px;
-  grid-template-columns: 200px 200px auto;
 }
 
-.grid-item {
-  background-color: white;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;
+.warning {
+  background-color: orange;
 }
+
+.error {
+  background-color: red;
+}
+/*# sourceMappingURL=styles.css.map */

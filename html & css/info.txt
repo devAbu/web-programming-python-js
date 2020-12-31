@@ -64,7 +64,6 @@ CSS:
       - a::b --> pseudo-element selector
 
         - Descendant Selector: Here, we use the descendant selector to only apply styling to list items found within an unordered list:
-
   Responsive Design:
     - Today, many people view websites on devices other than computers, such as smartphones and tablets. It’s important to make sure your website is readable to people on all devices.
     - One way we can achieve this is through knowledge of the viewport. The viewport is the part of the screen that is actually visible to the user at any given time. By default, many webpages assume that the viewport is the same on any device, which is what leads to many sites (especially older ones) being difficult to interact with on mobile devices.
