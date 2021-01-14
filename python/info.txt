@@ -1,0 +1,168 @@
+*** INTRODUCTION ***
+
+- Python is a very powerful and widely-used language that will allow us to quickly build fairly complicated web applications. In this course, we’ll be using Python 3, although Python 2 is still in use in some places. When looking at outside resources, be careful to make sure they’re using the same version.
+
+- Let’s start where we start with many programming languages: Hello, world. This program, written in Python, would look like this: 
+    - main.py  - INTRODUCTION
+    - To break down what’s going on in that line, there is a print function built in to the python language, that takes an argument in parentheses, and displays that argument on the command line.
+
+    - To actually write and run this program on your computers, you’ll first type this line into your text editor of choice, and then save the file as something.py. Next, you’ll head over to your terminal, navigate to the directory containing your file, and type python something.py. In the case of the above program, the words “Hello, world!” will then be displayed in the terminal.
+    - When you type python file.py in your terminal, a program called an interpreter, which you downloaded together with Python, reads through your file line by line, and executes each line of the code. This is different than languages like C or Java, which need to be compiled into machine code before they can be run.
+
+*** VARIABLES ***
+
+- In order to assign a value to a variable in Python, the syntax looks like this:
+  - main.py - VARIABLES
+
+  - Unlike in some other programming languages, Python variable types are inferred, meaning that while each variable does have a type, we do not have to explicitly state which type it is when we create the variable. Some of the most common variable types are:
+    - int: An integer
+    - float: A decimal number
+    - chr: A single character
+    - str: A string, or sequence of characters
+    - bool: A value that is either True or False
+    - NoneType: A special value (None) indicating the absence of a value.
+
+*** INPUT *** 
+
+  - main.py - INPUT
+  
+  - In the first line, instead of assigning the variable name to an explicit value, we’re assigning it to whatever the input function returns.
+  - In the second line, we’re using the + operator to combine, or concatenate, two strings. In python, the + operator can be used to add numbers or concatenate strings and lists.
+
+*** Formatting Strings ***
+
+- While we can use the + operator to combine strings as we did above, in the latest versions of python, there are even easier ways to work with strings, known as formatted strings, or f-strings for short.
+- To indicate that we’re using formatted strings, we simply add an f before the quotation marks. For example, instead of using "Hello, " + name as we did above, we could write f"Hello, {name}" for the same result. We can even plug a function into this string if we want, and turn our program above into the single line:
+  - main.py - string format
+
+*** CONDITIONS *** 
+
+- Just like in other programming languages, Python gives us the ability to run different segments of code based on different conditions. For example, in the program below, we’ll change our output depending on the number a user types in:
+  - main.py - conditions
+
+  - Getting into how the above program works, conditionals in python contain a keyword (if, elif, or else) and then (except in the else case) a boolean expression, or an expression that evaluates to either True or False. Then, all of the code we want to run if a certain expression is true is indented directly below the statement. Indentation is required as part of the Python syntax.
+
+  - From the code above (main.py - CONDITIONS) we will get an error (TypeError): '>' not supported between instances of 'str' and 'int'
+  - An exception is what happens when an error occurs while we’re running our python code, and over time you’ll get better and better at interpreting these errors, which is a very valuable skill to have.
+  - Let’s look a bit more closely at this specific exception: If we look at the bottom, we’ll see that we ran into a TypeError, which generally means Python expected a certain variable to be of one type, but found it to be of another type. In this case, the exception tells us that we cannot use the > symbol to compare a str and int, and then above we can see that this comparison occurs in line 2.
+  - In this case, it’s obvious that 0 is an integer, so it must be the case that our num variable is a string. This is happening because it turns out that the input function always returns a string, and we have to specify that it should be turned into (or cast into) an integer using the int function. This means our first line would now look like: 
+    - num = int(input("Number: ")) --> added to main.py - CONDITIONS
+
+*** Sequences *** 
+
+- One of the most powerful parts of the Python language is its ability to work with sequences of data in addition to individual variables.
+
+- There are several types of sequences that are similar in some ways, but different in others. When explaining those differences, we’ll use the terms mutable/immutable and ordered/unordered. Mutable means that once a sequence has been defined, we can change individual elements of that sequence, and ordered means that the order of the objects matters.
+
+*** STRINGS *** - ordered: Yes, mutable: No
+
+- We’ve already looked at strings a little bit, but instead of just variables, we can think of a string as a sequence of characters. This means we can access individual elements within the string! For example:
+  - main.py - Strings
+
+*** Lists *** - ordered: Yes, Mutable: Yes
+
+- A Python list allows you to store any variable types. We create a list using square brackets and commas, as shown below. Similarly to strings, we can print an entire list, or some individual elements. We can also add elements to a list using append, and sort a list using sort
+  - main.py - LISTS
+
+*** TUPLES *** - ordered: Yes, Mutable: No
+
+- Tuples are generally used when you need to store just two or three values together, such as the x and y values for a point. In Python code, we use parentheses:
+  - main.py - Tuples
+
+*** SETS *** - ordered: No, Mutable: N/A
+
+- Sets are different from lists and tuples in that they are unordered. They are also different because while you can have two or more of the same elements within a list/tuple, a set will only store each value once. We can define an empty set using the set function. We can then use add and remove to add and remove elements from that set, and the len function to find the set’s size. Note that the len function works on all sequences in python. Also note that despite adding 4 and 3 to the set twice, each item can only appear once in a set.
+  - main.py - SETS
+
+*** DICTIONARIES *** - ordered: No, Mutable: Yes (similar to object in JS)
+
+- Python Dictionaries or dicts, will be especially useful in this course. A dictionary is a set of key-value pairs, where each key has a corresponding value, just like in a dictionary, each word (the key) has a corresponding definition (the value). In Python, we use curly brackets to contain a dictionary, and colons to indicate keys and values. For example:
+  - main.py - DICTIONARIES
+
+*** LOOPS ***
+
+- Loops are an incredibly important part of any programming language, and in Python, they come in two main forms: for loops and while loops. For now, we’ll focus on For Loops.
+
+  - For loops are used to iterate over a sequence of elements, performing some block of code (indented below) for each element in a sequence. For example, the following code will print out the numbers from 0 to 5:
+    - main.py - LOOPS
+  
+  - We can condense this code using the python range function, which allows us to easily get a sequence of numbers. The following code gives the exact same result as our code from above:
+    - main.py - LOOPS
+  
+  - This type of loop can work for any sequence! For example, if we wish to print each name in a list, we could write the code below:
+    - main.py - LOOPS
+
+  - We can get even more specific if we want, and loop through each character in a single name!
+    - main.py - LOOPS
+
+*** FUNCTIONS ***
+
+- We’ve already seen a few python functions such as print and input, but now we’re going to dive into writing our own functions. To get started, we’ll write a function that takes in a number and squares it:
+  - main.py - FUNCTIONS
+
+  - Notice how we use the def keyword to indicate we’re defining a function, that we’re taking in a single input called x and that we use the return keyword to indicate what the function’s output should be.
+
+  - We can then “call” this function just as we’ve called other ones: using parentheses:
+    - main.py - FUNCTIONS
+
+*** MODULES ***
+
+- As our projects get larger and larger, it will become useful to be able to write functions in one file and run them in another. In the case above, we could create create one file called functions.py with the code:
+  - square.py
+  - function.py
+
+- There are many built-in Python modules we can import such as math or csv that give us access to even more functions. Additionally, we can download even more Modules to access even more functionality! We’ll spend a lot of time using the Django Module, which we’ll discuss in the next lecture.
+
+*** OBJECT-ORIENTED PROGRAMMING / OOP ***
+
+- Object Oriented Programming is a programming paradigm, or a way of thinking about programming, that is centered around objects that can store information and perform actions.
+
+- Classes: We’ve already seen a few different types of variables in python, but what if we want to create our own type? A Python Class is essentially a template for a new type of object that can store information and perform actions. Here’s a class that defines a two-dimensional point:
+  - oop.py - classes
+
+    - Note that in the above code, we use the keyword self to represent the object we are currently working with. self should be the first argument for any method within a Python class. (something like "this" keyword)
+  
+  - Now, let’s see how we can actually use the class from above to create an object:
+    - oop.py - OBJECT
+
+- Now, let’s look at a more interesting example where instead of storing just the coordinates of a Point, we create a class that represents an airline flight:
+  - oop.py - example2
+
+  - Note that above, we use the line if not self.open_seats() to determine whether or not there are open seats. This works because in Python, the number 0 can be interpretted as meaning False, and we can also use the keyword not to signify the opposite of the following statement so not True is False and not False is True. Therefore, if open_seats returns 0, the entire expression will evaluate to True
+
+  - Now, let’s try out the class we’ve created by instantiating some objects:
+    - oop.py - example2
+
+
+*** Functional Programming *** 
+
+- In addition to supporting Object-Oriented Programming, Python also supports the Functional Programming Paradigm, in which functions are treated as values just like any other variable.
+
+*** Decorators ***
+
+- One thing made possible by functional programming is the idea of a decorator, which is a higher-order function that can modify another function. For example, let’s write a decorator that announces when a function is about to begin, and when it ends. We can then apply this decorator using an @ symbol.
+  - fncP.py - decorators
+
+*** LAMBDA FUNCTIONS ***
+
+- Lambda functions provide another way to create functions in python. For example, if we want to define the same square function we did earlier, we can write:
+  - fncP.py - Lambda
+  
+  - Where the input is to the left of the : and the output is on the right.
+
+  - This can be useful when we don’t want to write a whole separate function for a single, small use. For example, if we want to sort some objects where it’s not clear at first how to sort them. Imagine we have a list of people, but with names and houses instead of just names that we wish to sort:
+    - fncP.py - Lambda
+  
+  - While this does work, we’ve had to write an entire function that we’re only using once, we can make our code more readable by using a lambda function:
+    - fncP.py - WITH Lambda
+
+*** Exceptions ***
+
+- In the following chunk of code, we’ll take two integers from the user, and attempt to divide them:
+  - exception.py
+
+  - In many cases, this program works well:
+  - However, we’ll run into problems when we attempt to divide by 0:
+  - We can deal with this messy error using Exception Handling. In the following block of code, we will try to divide the two numbers, except when we get a ZeroDivisionError:
+  - However, we still run into an error when the user enters non-numbers for x and y:
+    - exception.py - Exception
