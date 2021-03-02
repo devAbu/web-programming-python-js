@@ -136,3 +136,75 @@ Now, we’ve seen how we can modify our HTML templates based on the context we p
 
 
 *** STYLING ***
+
+If we want to add a CSS file, which is a static file because it doesn’t change, we’ll first create a folder called static, then a styles.css file within that. In this file, we can add any styling we wish just as we did in the first lecture:
+  newyear --> static --> styles.css
+  ** CHECK SETTINGS.PY - STATIC_URL = '/static/'
+  
+
+Now, to include this styling in our HTML file, we add the line {% load static %} to the top of our HTML template, which signals to Django that we wish to have access to the files in our static folder. Then, rather than hard-coding the link to a stylesheet as we did before, we’ll use some Django-specific syntax:
+  - <link rel="stylesheet" href="{% static 'newyear/styles.css' %}">
+
+
+*** TASKS ***
+
+- Now, let’s take what we’ve learned so far and apply it to a mini-project: creating a TODO list. Let’s start by, once again, creating a new app:
+  1. run python manage.py startapp tasks in the terminal.
+  2. Edit settings.py, adding “tasks” as one of our INSTALLED_APPS
+  3. Edit our project’s urls.py file, and include a path similar to the one we created for the hello app:
+  - path('tasks/', include("tasks.urls"))
+
+-- Create another urls.py file within our new app’s directory, and update it to include a path similar to the index path in hello (my-app):
+  - tasks --> urls.py
+
+-- Create an index function in views.py
+  - Now, let’s begin by attempting to simply create a list of tasks and then display them to a page. Let’s create a Python list at the top of views.py where we’ll store our tasks. Then, we can update our index function to render a template, and provide our newly-created list as context.
+    - tasks --> views.py
+
+  Now, let’s work on creating our template HTML file:
+    - tasks --> templates --> tasks --> index.html
+
+*** FORM ***
+
+- Now that we can see all of our current tasks as a list, we may want to be able to add some new tasks. To do this we’ll start taking a look at using forms to update a web page. Let’s begin by adding another function to views.py that will render a page with a form for adding a new task:
+  - tasks --> views.py
+
+- Next, make sure to add another path to urls.py:
+  - tasks --> urls.py
+
+- Now, we’ll create our add.html file, which is fairly similar to index.html, except that in the body we’ll include a form rather than a list:
+  - tasks --> templates --> tasks --> add.html
+
+--- However, what we’ve just done isn’t necessarily the best design, as we’ve just repeated the bulk of that HTML in two different files. Django’s templating language gives us a way to eliminate this poor design: template inheritance. This allows us to create a layout.html file that will contain the general structure of our page:
+  - tasks --> templates --> tasks --> layout.html
+
+- Notice that we’ve again used {%...%} to denote some sort of non-HTML logic, and in this case, we’re telling Django to fill this “block” with some text from another file. Now, we can alter our other two HTML files to look like:
+  - update index.html
+  - update add.html
+
+- Notice how we can now get rid of much of the repeated code by extending our layout file
+
+-- Next, it’s not ideal to have to type “/add” in the URL any time we want to add a new task, so we’ll probably want to add some links between pages. Instead of hard-coding links though, we can now use the name variable we assigned to each path in urls.py, and create a link that looks like this:
+  <a href="{% url 'add' %}">Add a New Task</a>
+   - where ‘add’ is the name of that path. We can do a similar thing in our add.html:
+      <a href="{% url 'index' %}">View Tasks</a>
+          ** This could potentially create a problem though, as we have a few routes named index throughout our different apps. We can solve this by going into each of our app’s urls.py file, and adding an app_name variable, so that the files now look something like this:
+              - tasks --> urls.py
+
+          - We can then change our links from simply index and add to tasks:index and tasks:add
+            - tasks --> templates --> tasks --> index.html / add.html
+
+- Now, let’s work on making sure the form actually does something when the user submits it. We can do this by adding an action to the form we have created in add.html:
+  - tasks --> templates --> tasks --> add.html
+
+- This means that once the form is submitted, we will be routed back to the add URL. Here we’ve specified that we’ll be using a post method rather than a get method, which is typically what we’ll use any time a form could alter the state of that web page.
+
+We need to add a bit more to this form now, because Django requires a token to prevent Cross-Site Request Forgery (CSRF) Attack. This is an attack where a malicious user attempts to send a request to your server from somewhere other than your site. This could be a really big problem for some websites. Say, for example, that a banking website has a form for one user to transfer money to another one. It would be catastrophic if someone could submit a transfer from outside of the bank’s website!
+
+To solve this problem, when Django sends a response rendering a template, it also provides a CSRF token that is unique with each new session on the site. Then, when a request is submitted, Django checks to make sure the CSRF token associated with the request matches one that it has recently provided. Therefore, if a malicious user on another site attempted to submit a request, they would be blocked due to an invalid CSRF token. This CSRF validation is built into the Django Middleware framework, which can intervene in the request-response processing of a Django app. We won’t go into any more detail about Middleware in this course, but do look at the documentation if interested!
+
+- To incorporate this technology into our code, we must add a line to our form in add.html.
+  - tasks --> templates --> tasks --> add.html
+    - This line adds a hidden input field with the CSRF token provided by Django, such that when we reload the page, it looks as though nothing has changed. However, if we inspect element, we’ll notice that a new input field has been added:
+
+*** DJANGO FORMS ***
