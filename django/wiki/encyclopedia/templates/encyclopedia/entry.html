@@ -1,0 +1,3 @@
+{% extends "encyclopedia/layout.html" %} {% load markdownify %} {% block title%}
+{{ name.capitalize }} {% endblock %} {% block body %} {{entry|markdownify}}
+{%endblock %}
