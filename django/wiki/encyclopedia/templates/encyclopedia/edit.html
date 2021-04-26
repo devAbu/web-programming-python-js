@@ -1,0 +1,16 @@
+{% extends "encyclopedia/layout.html" %} {% block title %} Add new encyclopedia
+entry {%endblock %} {% block body %}
+<h1>New entry</h1>
+
+<form>
+  <textarea
+    name="title"
+    id="title"
+    cols="30"
+    rows="10"
+    placeholder="Title..."
+  ></textarea>
+  <input type="submit" name="new-submit-btn" id="new-submit-btn" />
+</form>
+
+{% endblock %}
