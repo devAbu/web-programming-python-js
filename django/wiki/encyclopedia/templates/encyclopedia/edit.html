@@ -1,16 +1,20 @@
-{% extends "encyclopedia/layout.html" %} {% block title %} Add new encyclopedia
+{% extends "encyclopedia/layout.html" %} {% block title %} Edit encyclopedia
 entry {%endblock %} {% block body %}
-<h1>New entry</h1>
+<h1>Edit entry</h1>
 
-<form>
+<form action="{% url 'editPage' name %}" method="post">
+  {% csrf_token %} {{ form }}
+  <input type="hidden" name="title" value="{{name}}" />
   <textarea
-    name="title"
-    id="title"
+    name="content"
+    id="content"
     cols="30"
     rows="10"
     placeholder="Title..."
-  ></textarea>
+  >
+{{entry}}</textarea
+  >
+
   <input type="submit" name="new-submit-btn" id="new-submit-btn" />
 </form>
-
 {% endblock %}

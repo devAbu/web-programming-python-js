@@ -2,7 +2,10 @@
 entry {%endblock %} {% block body %}
 <h1>New entry</h1>
 
-<form>
+{{message}}
+
+<form action="{% url 'newPage' %}" method="post">
+  {% csrf_token %} {{ form }} {% comment %}
   <input type="text" name="title" id="title" placeholder="Title..." />
   <br />
   <textarea
@@ -12,6 +15,7 @@ entry {%endblock %} {% block body %}
     rows="10"
     placeholder="Markdown content..."
   ></textarea>
+  {% endcomment %}
 
   <input type="submit" name="new-submit-btn" id="new-submit-btn" />
 </form>
